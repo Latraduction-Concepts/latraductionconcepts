@@ -500,9 +500,9 @@ async function verifyCertificate() {
 
 }
 
-/* QR CODE SUPPORT
-   Lets a link like  ...latraductionconcepts/?id=LC-2026-002
-   open the page and verify the certificate automatically. */
+/* QR CODE REDIRECT
+   Sends existing certificate QR links to the new Bolt website
+   while preserving the Certificate ID. */
 
 window.addEventListener("DOMContentLoaded", function () {
 
@@ -510,9 +510,10 @@ window.addEventListener("DOMContentLoaded", function () {
   const id = params.get("id");
 
   if (id) {
-    document.getElementById("certificateId").value = id;
-    document.getElementById("verification").scrollIntoView();
-    verifyCertificate();
+    window.location.replace(
+      "https://latraduction-concepts.bolt.host/?id=" +
+      encodeURIComponent(id)
+    );
   }
 
 });
